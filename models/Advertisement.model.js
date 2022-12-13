@@ -22,7 +22,6 @@ const advSchema = new mongoose.Schema({
 
   image: {
     type: String,
-    required: true,
   },
 
   price: {

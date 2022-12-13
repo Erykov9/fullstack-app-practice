@@ -14,10 +14,10 @@ const userSchema = new mongoose.Schema({
     minlength: 7,
   },
 
-  // avatar: {
-  //   type: String,
-  //   require: true,
-  // },
+  avatar: {
+    type: String,
+    require: true,
+  },
 
   // phoneNumber: {
   //   type: String,

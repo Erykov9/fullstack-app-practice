@@ -1,20 +1,32 @@
-const { json } = require('body-parser');
+const fs = require('fs');
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs');
+const getImageFileType = require('../utils/getImageFileType')
 
 exports.register = async (req, res) => {
   try  {
 
     const {login, password} = req.body;
+    const fileType = req.file ? await getImageFileType(req.file) : 'unknown'
 
-    if(login && typeof login === 'string' && password && typeof password === 'string') {
+    if(
+        login 
+        && typeof login === 'string'
+        && password 
+        && typeof password === 'string' 
+        && req.file 
+        && ['image/png', 'image/jpeg', 'image/gif'].includes(fileType)
+      ) {
       const userWithLogin = await User.findOne({login});
 
       if(userWithLogin) {
+        if(req.file) {
+          fs.unlinkSync(`./public/uploads//${req.file.filename}`);
+        }
         return res.status(409).send({message: 'User with this login already exists'});
       }
 
-      const newUser = await User.create({ login, password: await bcrypt.hash(password, 10)});
+      const newUser = await User.create({ login, password: await bcrypt.hash(password, 10), avatar: req.file.filename});
       // await newUser.save();
       res.status(200).json({message: 'User created: ' + newUser.login})
     } else {
@@ -57,6 +69,7 @@ exports.logout = async(req, res) => {
 
   try {
     req.session.destroy();
+    res.send('Logged out');
   }catch(err) {
     res.status(500).send({message: err});
   }
