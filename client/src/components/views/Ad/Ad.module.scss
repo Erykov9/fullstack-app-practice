@@ -1,0 +1,33 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px;
+
+  &__image {
+    max-width: 450px;
+    max-height: 450px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ul {
+      margin: 0;
+      padding-bottom: 15px;
+    }
+
+    button  {
+      margin: 5px;
+    }
+  }
+}

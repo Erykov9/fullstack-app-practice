@@ -1,0 +1,26 @@
+@import '../../../styles/settings.scss';
+
+img {
+  height: 300px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.col {
+  display: flex;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.root {
+  padding-top: 15px;
+  text-align: center;
+  h1 {
+    padding-bottom: 15px;
+  }
+}

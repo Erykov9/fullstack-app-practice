@@ -1,0 +1,41 @@
+@import './bootstrap.scss';
+
+/* GLOBAL SETTINGS */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+  opacity: 0.5;
+}
+
+li {
+  list-style: none;
+  padding: 0 5px;
+  margin: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+/* GLOBAL ACCESS */
+
+$color-main: rgb(143, 133, 133);
+$color-secondary: rgb(29, 0, 0);

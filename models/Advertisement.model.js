@@ -16,7 +16,7 @@ const advSchema = new mongoose.Schema({
   },
 
   publicDate: {
-    type: String,
+    type: Date,
     required: true,
   },
 
