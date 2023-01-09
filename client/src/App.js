@@ -13,10 +13,14 @@ import SignUp from './components/features/SignUp/SignUp';
 import AdEdit from './components/views/AdEdit/AdEdit';
 import AdAdd from './components/views/AdAdd/AdAdd';
 
+import { AUTH_URL } from './config';
+
+
 import './styles/bootstrap.scss';
 import './styles/settings.scss'
 
 const App = () => {
+
 
   const routes = useRoutes([
     {

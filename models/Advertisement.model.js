@@ -3,21 +3,21 @@ const mongoose = require('mongoose');
 const advSchema = new mongoose.Schema({
   title: { 
     type: String, 
-    required: true, 
+    required: false, 
     maxlength: 50, 
     minlength: 10 
   },
 
   description: { 
     type: String, 
-    required: true, 
+    required: false, 
     maxlength: 1000, 
     minlength: 20
   },
 
   publicDate: {
     type: Date,
-    required: true,
+    required: false,
   },
 
   image: {
@@ -26,17 +26,17 @@ const advSchema = new mongoose.Schema({
 
   price: {
     type: Number,
-    required: true,
+    required: false,
   },
 
   location: {
     type: String,
-    required: true,
+    required: false,
   },
 
   info: {
     type: String,
-    required: true,
+    required: false,
   }
 });
 

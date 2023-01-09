@@ -8,39 +8,49 @@ import {
   Spinner
 } from 'reactstrap';
 import  styles from './AdModify.module.scss';
-import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAdById, getAdsRequestInfo, getAdsRequest } from "../../../redux/adsRedux";
-import { useState, useEffect } from "react";
+import {  getAdsRequestInfo, getAdsRequest, deleteAd, deleteAdDB } from "../../../redux/adsRedux";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
-const AdModify = ({edit}) => {
-  const { id } = useParams();
+const AdModify = ({action, handler, ...props}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const request = useSelector(getAdsRequestInfo);  
+  const date = new Date().toLocaleDateString();
   
   useEffect(() => {
     dispatch(getAdsRequest()); 
+
   }, [dispatch]);
+  const id = props.id
+  const [title, setTitle] = useState(props.title || '');
+  const [description, setDescription] = useState(props.description || '');
+  const [price, setPrice] = useState(props.price || '');
+  const [location, setLocation] = useState(props.location || '');
+  const [image, setImage] = useState(props.image || '');
+  const [publishDate, setDate] = useState(props.date || '');
+  const [info, setInfo] = useState(props.info || '');
 
-  const ad = useSelector(state => getAdById(state, id));
-  const request = useSelector(getAdsRequestInfo);
-  console.log(ad, request)
+  const onDelete = (ad) => {
+    dispatch(deleteAd(id));
+    dispatch(deleteAdDB(id));
+    navigate('/')
+  };
 
 
-  const [title, setTitle] = useState('' || ad.title);
-  const [description, setDescription] = useState('' || ad.description);
-  const [price, setPrice] = useState('' || ad.price);
-  const [location, setLocation] = useState('' || ad.location);
+  const subHandler = () => {
+    handler({id, title, description, price, location, publicDate: date, info: 'Test', image: image  });
+  };
 
-  const date = new Date().toLocaleDateString();
-  
   if(request.pending || !request.success) return <Spinner/>
   else {
   return  (
       <div className={styles.root}>
-        <h1>{edit} Advertisement</h1>
-        <h3>{ad.info}</h3>
-        <Form>
+        <h1> Advertisement</h1>
+        <h3>{props.info}</h3>
+        <Form onSubmit={() => subHandler()}>
           <FormGroup>
             <Label 
             for="title"
@@ -79,7 +89,9 @@ const AdModify = ({edit}) => {
             Image file
             <Input
               type='file'
+              onChange={e => setImage(e.target.files[0])}
               id='file'
+              
             />
             <FormText>Max upload size is 1MB</FormText>
           </FormGroup>
@@ -108,13 +120,13 @@ const AdModify = ({edit}) => {
             type='text'
             required
             placeholder='Location'
-            value={location}
             minLength={3}
             maxLength={25}
+            value={location}
             onChange={e => setLocation(e.target.value)}
             />
           </FormGroup>
-          <Button>{edit == 'Edit' ? 'Post' : 'Add'}</Button>
+          <Button>{action}</Button>{action == 'Edit' ? <Button onClick={() => onDelete(props.ad)}>Delete</Button> : null}
         </Form>
 
       </div>

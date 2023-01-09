@@ -30,8 +30,10 @@ app.use(session({
   secret: process.env.SECRET_KEY, 
   store: MongoStore.create(mongoose.connection), 
   resave: false,  
-  saveUninitialized: false, cookie: {
+  saveUninitialized: false,
+  cookie: {
     secure: process.env.NODE_ENV == 'production',
+    maxAge: 24* 7 * 1000
   }
 }));
 

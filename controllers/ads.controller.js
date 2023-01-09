@@ -15,7 +15,6 @@ exports.addAd = async (req, res) => {
   try {
 
     const { title, description, publicDate, price, location, info } = req.body;
-    console.log(req.body)
 
     const fileType = req.file ? await getImageFileType(req.file) : 'unknown'
 
@@ -71,6 +70,7 @@ exports.Delete = async (req, res) => {
 
 exports.Edit = async(req,res) => {
   const { title, description, publicDate, price, location, info } = req.body;
+  console.log(req.body)
 
   try  {
     const adv = await Advertisement.findById(req.params.id);

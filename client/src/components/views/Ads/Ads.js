@@ -19,12 +19,14 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import styles from './Ads.module.scss';
+import { getLogin } from "../../../redux/userRedux";
 
 const Ads = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const ads = useSelector(getAds);
   const request = useSelector(getAdsRequestInfo);
+  const user = useSelector(getLogin);
 
   useEffect(() => {
     dispatch(getAdsRequest()); 
@@ -36,7 +38,7 @@ const Ads = () => {
     navigate('/ad/' + attribute)
   }
 
-  if(request.pending) return <Spinner/>
+  if(request.pending || !request.success || !ads) return <Spinner/>
   return (
     <div className={styles.root}>
       <h1>Ads</h1>
