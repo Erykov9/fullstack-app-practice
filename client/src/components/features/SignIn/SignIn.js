@@ -31,6 +31,7 @@ const SignIn = () => {
         'Content-Type': 'application/json',
       },
       // credentials: 'include',
+      // mode: 'no-cors',
       body: JSON.stringify({login, password})
     };
 

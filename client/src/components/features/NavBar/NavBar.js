@@ -20,6 +20,7 @@ const NavBar = () => {
           <li className={isActive == '' ? styles.active : ''} onClick={activeHandler}><NavLink to="/">HOME</NavLink></li>
           <li className={isActive == 'about' ? styles.active : ''} onClick={activeHandler}><NavLink to="/about">ABOUT</NavLink></li>
           <li className={isActive == 'contact' ? styles.active : ''} onClick={activeHandler}><NavLink to="/contact">CONTACT</NavLink></li>
+          <li><NavLink to="/ad/adadd">ADD</NavLink></li>
         </ul>
         <ul>
           <li className={isActive == 'signin' ? styles.active : ''} onClick={activeHandler}><NavLink to="/signin">SIGN IN</NavLink></li>

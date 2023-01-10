@@ -15,25 +15,27 @@ const server = app.listen(process.env.PORT || 8000, () => {
 
 connectToDB();
 
-if(process.env.NODE_ENV !== 'production') {
-  app.use(
-    cors({
-      origin: ['http://localhost:3000'],
-      credentials: true
-    })
-  );
-}
+// if(process.env.NODE_ENV !== 'production') {
+//   app.use(
+//     cors({
+//       origin: ['http://localhost:3000'],
+//       credentials: true
+//     })
+//   );
+// } to uncomment
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({ 
-  secret: process.env.SECRET_KEY, 
+  // secret: process.env.SECRET_KEY, to uncomment
+  secret: 'xyz567',
   store: MongoStore.create(mongoose.connection), 
   resave: false,  
   saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV == 'production',
-  }
+  // cookie: {
+  //   secure: process.env.NODE_ENV == 'production',
+  // } to uncomment
 }));
 
 
